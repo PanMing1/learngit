@@ -1,9 +1,12 @@
 package demo.ming.com.universal;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import java.util.List;
 
 /**
  * 作者：Administrator on 2018/12/31 11:08
@@ -12,24 +15,38 @@ import android.widget.BaseAdapter;
 
 public abstract class CommonAdapter<T> extends BaseAdapter {
     protected LayoutInflater cInflater;
+    protected List<T> mDatas;
+    protected Context mContext;
+    private int mLayoutId;
+
+    public CommonAdapter(List<T> mDatas, Context mContext,int mLayoutId) {
+        cInflater = LayoutInflater.from(mContext);
+        this.mDatas = mDatas;
+        this.mContext = mContext;
+        this.mLayoutId = mLayoutId;
+    }
 
     @Override
     public int getCount() {
-        return 0;
+        return mDatas.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public T getItem(int position) {
+        return mDatas.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        return null;
+    public View getView(int position, View converView, ViewGroup parent) {
+        ViewHolder holder = ViewHolder.get(mContext,converView,parent,position,mLayoutId);
+        convert(holder,getItem(position));
+        return holder.gethView();
     }
+
+    public abstract void convert(ViewHolder holder, T t);
 }

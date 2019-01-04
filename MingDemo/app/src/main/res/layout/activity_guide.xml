@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/guide_relative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="demo.ming.com.mingdemo.GuideActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/guide_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <requestFocus />
+        <!--requestFocus:获得焦点-->
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/guide_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="45dp"
+        android:gravity="center"
+        android:orientation="horizontal" />
+
+</RelativeLayout>
