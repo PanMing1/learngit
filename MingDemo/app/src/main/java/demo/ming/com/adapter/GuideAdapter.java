@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者：Administrator on 2019/1/4 10:54
@@ -14,9 +15,9 @@ import java.util.ArrayList;
  */
 
 public class GuideAdapter extends PagerAdapter {
-    private ArrayList<ImageView> imageViews;
+    private List<View> imageViews;
 
-    public GuideAdapter(ArrayList<ImageView> imageViews) {
+    public GuideAdapter(List<View> imageViews) {
         this.imageViews = imageViews;
     }
 
@@ -41,7 +42,7 @@ public class GuideAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+    public Object instantiateItem( ViewGroup container, int position) {
         container.addView(imageViews.get(position));
         return imageViews.get(position);
     }

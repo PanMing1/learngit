@@ -6,14 +6,16 @@
     android:layout_height="match_parent"
     tools:context="demo.ming.com.mingdemo.GuideActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/guide_pager"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <requestFocus />
-        <!--requestFocus:获得焦点-->
-    </android.support.v4.view.ViewPager>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/guide_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <!--<requestFocus/>:获得焦点-->
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/guide_linear"
@@ -23,6 +25,35 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="45dp"
         android:gravity="center"
-        android:orientation="horizontal" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:maxWidth="35dp"
+            android:padding="10dp"
+            android:src="@drawable/xiaoyuandian" />
+        <!--android:clickable="true":可点击
+            android:focusable="true"：可聚焦-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:maxWidth="35dp"
+            android:padding="10dp"
+            android:src="@drawable/xiaoyuandian" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:maxWidth="35dp"
+            android:padding="10dp"
+            android:src="@drawable/xiaoyuandian" />
+    </LinearLayout>
 
 </RelativeLayout>

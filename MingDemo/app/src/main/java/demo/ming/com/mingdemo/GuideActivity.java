@@ -1,104 +1,115 @@
 package demo.ming.com.mingdemo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import demo.ming.com.adapter.GuideAdapter;
 
 //引导页
 
-public class GuideActivity extends Activity implements ViewPager.OnPageChangeListener {
+public class GuideActivity extends Activity implements View.OnClickListener {
+    //    声明ViewPager、适配器、List数列、上下文
     private ViewPager vPager;
     private GuideAdapter gAdapter;
-    private static int[] images = {R.drawable.icon_guide_one, R.drawable.icon_guide_two, R.drawable.icon_guide_three};
-    private ArrayList<ImageView> imageViews;
-    private ImageView[] dotViews; //小圆点
+    private List<View> imageViews;
     private Context context;
+    //    引导页图片资源
+    private static int[] images = {R.layout.guide_one, R.layout.guide_two, R.layout.guide_three};
+    //    小圆点
+    private ImageView[] dots;
+    //    记录当前选中位置
+    private int dqxzwz;
+    //    最后一张引导页上的按钮
+    private Button glast_but;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
         context = GuideActivity.this;
-        //设置每一张图片都填充窗口
-        ViewPager.LayoutParams mParams = new ViewPager.LayoutParams();
+
         imageViews = new ArrayList<>();
+
+//        初始化引导页视图列表
         for (int i = 0; i < images.length; i++) {
-            ImageView iv = new ImageView(this);
-            //设置布局
-            iv.setLayoutParams(mParams);
-            //为ImageView添加图片资源
-            iv.setImageResource(images[i]);
-            //这里是一个图片的适配
-            iv.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageViews.add(iv);
-            //为最后一张图片添加点击事件
+            View view = LayoutInflater.from(context).inflate(images[i], null);
+//            判断引导页是否是最后一页
             if (i == images.length - 1) {
-                iv.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
-                        //跳转到主界面
-                        Intent intent = new Intent(context, MainActivity.class);
-                        startActivity(intent);
-                        return true;
-                    }
-                });
+                glast_but = view.findViewById(R.id.glast_button);
+//                给按钮添加一个额外的数据 然后用getTag()取出
+                /*
+                *   button1.setTag(1);
+                *   button1.setOnClickListener(this);
+                *   public void onClick(View v) {
+                *   int tag = (Integer) v.getTag();
+                *   switch (tag){
+                *   case 1:
+                *   System.out.println("button1 click");
+                *   break;
+                * */
+                glast_but.setTag("enter");
+                glast_but.setOnClickListener(this);
             }
-        }
-        //小圆点数量判断以及小圆点之间的间隔&小圆点默认启动显示的位置
-        LinearLayout linearLayout = findViewById(R.id.guide_linear);
-        LinearLayout.LayoutParams mParamsa = new LinearLayout.LayoutParams(20, 20);
-        //设置小圆点左右之间的间隔
-        mParamsa.setMargins(10, 0, 10, 0);
-        dotViews = new ImageView[images.length];
-        //判断小圆点的数量，从0开始，0表示第一个
-        for (int i = 0; i < imageViews.size(); i++) {
-            ImageView imageView = new ImageView(this);
-            imageView.setLayoutParams(mParamsa);
-            imageView.setImageResource(R.drawable.xiaoyuandian);
-            if (i == 0) {
-                //默认启动时，选中第一个小圆点
-                imageView.setSelected(true);
-            } else {
-                imageView.setSelected(false);
-            }
-            //得到每个小圆点的引用，用于滑动页面时，（onPageSelected方法中）更改它们的状态。
-            dotViews[i] = imageView;
-            //添加到布局里面显示
-            linearLayout.addView(imageView);
+            imageViews.add(view);
         }
         vPager = findViewById(R.id.guide_pager);
         gAdapter = new GuideAdapter(imageViews);
         vPager.setAdapter(gAdapter);
+
+        initDots();
     }
 
-    @Override
-    public void onPageScrolled(int i, float v, int i1) {
-
+    private void initDots() {
+        LinearLayout linearLayout = findViewById(R.id.guide_linear);
+        dots = new ImageView[images.length];
+        //判断小圆点的数量，从0开始，0表示第一个  循环获得小数点图片
+        for (int i = 0; i < imageViews.size(); i++) {
+//            得到一个LinearLayout下面的每一个子元素
+//            getChildAt(i) 获取一个布局中的的view，removeViewAt(i)表示删除一个布局中的view
+            dots[i] = (ImageView) linearLayout.getChildAt(i);
+//            都设置为灰色
+//            setEnabled 设置是否可用  是否拥有权限  是否启用该功能 等等
+            dots[i].setEnabled(false);
+            dots[i].setOnClickListener(this);
+            dots[i].setTag(i);
+        }
+        dqxzwz = 0;
+//        设置为白色，即选中状态
+        dots[dqxzwz].setEnabled(true);
     }
-    //当前页面的索引值来设置小圆点的状态
+//setCurrentItem(int index)方法主要用来制定初始化的页面。例如加入3个页面通过setCurrentItem(0)制定第一个页面为当前页面
     @Override
-    public void onPageSelected(int position) {
-        for (int i = 0; i < dotViews.length; i++) {
-            if (position == i) {
-                dotViews[i].setSelected(true);
-            } else {
-                dotViews[i].setSelected(false);
-            }
+    public void onClick(View view) {
+        String str = (String) view.getTag();
+        if (str.equals("enter")) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 
-    @Override
-    public void onPageScrollStateChanged(int i) {
+/*
 
+    //当前页面的索引值来设置小圆点的状态
+    @Override
+    public void onPageSelected(int position) {
+        for (int i = 0; i < dots.length; i++) {
+            if (position == i) {
+                dots[i].setSelected(true);
+            } else {
+                dots[i].setSelected(false);
+            }
+        }
     }
+*/
 }
