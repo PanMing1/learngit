@@ -32,6 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
             android:maxWidth="35dp"
             android:padding="10dp"
             android:src="@drawable/xiaoyuandian" />
@@ -42,6 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
             android:maxWidth="35dp"
             android:padding="10dp"
             android:src="@drawable/xiaoyuandian" />
@@ -51,6 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:adjustViewBounds="true"
+            android:clickable="true"
+            android:focusable="true"
             android:maxWidth="35dp"
             android:padding="10dp"
             android:src="@drawable/xiaoyuandian" />

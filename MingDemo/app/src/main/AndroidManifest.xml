@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Start_UpActivity"
+        <activity
+            android:name=".StartUpActivity"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +20,15 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/FullScreen"/>
+            android:theme="@style/FullScreen" />
         <activity
             android:name=".GuideActivity"
-            android:theme="@style/FullScreen"/>
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity android:name=".MortgageActivity" />
+        <activity android:name=".T1Activity"></activity>
     </application>
 
 </manifest>

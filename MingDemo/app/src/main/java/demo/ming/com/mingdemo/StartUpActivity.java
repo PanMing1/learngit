@@ -15,7 +15,7 @@ import demo.ming.com.utils.SpUtils;
  * 使用SharedPreference来保存app启动状态，如果为true，则进入功能导航，否则延迟2秒之后进入主页面。
  */
 
-public class Start_UpActivity extends Activity {
+public class StartUpActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

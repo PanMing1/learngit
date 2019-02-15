@@ -18,19 +18,23 @@ public class GuideAdapter extends PagerAdapter {
     private List<View> imageViews;
 
     public GuideAdapter(List<View> imageViews) {
+        super();
         this.imageViews = imageViews;
     }
 
 //  获取当前要显示对象的数量
     @Override
     public int getCount() {
-        return imageViews.size();
+        if (imageViews != null) {
+            return imageViews.size();
+        }
+        return 0;
     }
 
 //  判断是否用对象生成界面
     @Override
-    public boolean isViewFromObject(View view, Object o) {
-        return view == o;
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
     }
 //  从ViewGroup中移除当前对象（图片）
 
@@ -43,7 +47,7 @@ public class GuideAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem( ViewGroup container, int position) {
-        container.addView(imageViews.get(position));
+        container.addView(imageViews.get(position),0);
         return imageViews.get(position);
     }
 }

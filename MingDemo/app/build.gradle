@@ -1,18 +1,29 @@
 apply plugin: 'com.android.application'
 
 android {
+    //指定编译用的SDK版本号，如28表示使用Android9.0编译
     compileSdkVersion 28
+    //指定编译工具的版本号，开头两个是；数字必须和compileSdkVersion一致；版本号查找方法：cmd -> set | findstr /i android 中查找SDK安装目录，
+    // 版本号在sdk/buil-tools中
+//    buildToolsVersion "28.0.3"
     defaultConfig {
+        //这里无需修改
         applicationId "demo.ming.com.mingdemo"
+        //最小SDK
         minSdkVersion 15
+        //最大
         targetSdkVersion 28
+        //版本号
         versionCode 1
+        //版本名称
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
+            //混淆规则开启状态
             minifyEnabled false
+            //
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -21,6 +32,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
