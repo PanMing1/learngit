@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/冷灰"
+    tools:context="demo.ming.com.mingdemo.T2Activity">
+
+    <demo.ming.com.mingdemo.M1
+        android:id="@+id/main_button"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:hint="带删除的EditText"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:textColor="@color/黑色"
+        android:background="@drawable/bk_one"
+        android:textCursorDrawable="@null"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -2,4 +2,7 @@
     <string name="app_name">西东</string>
     <string name="title_activity_guide">GuideActivity</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_t2">T2Activity</string>
+    <string name="title_activity_t3">T3Activity</string>
+    <string name="title_activity_t4">T4Activity</string>
 </resources>
